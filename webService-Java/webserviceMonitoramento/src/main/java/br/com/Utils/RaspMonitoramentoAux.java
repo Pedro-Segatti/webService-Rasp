@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.mapeamento;
+package br.com.Utils;
 
+import br.com.mapeamento.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -25,59 +26,29 @@ import javax.validation.constraints.Size;
  *
  * @author Segatti
  */
-@Entity
-@Table(name = "RASP_MONITORAMENTO")
-public class RaspMonitoramento implements Serializable {
+public class RaspMonitoramentoAux {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "MON_ID")
     private Integer monId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MON_DATA_INFO")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date monDataInfo;
-    @Size(max = 100)
-    @Column(name = "MON_INFO_CPU_DISP")
     private String monInfoCpuDisp;
-    @Size(max = 100)
-    @Column(name = "MON_INFO_CPU_UTILIZADA")
     private String monInfoCpuUtilizada;
-    @Size(max = 100)
-    @Column(name = "MON_INFO_RAM_DISP")
     private String monInfoRamDisp;
-    @Size(max = 100)
-    @Column(name = "MON_INFO_RAM_UTILIZADA")
     private String monInfoRamUtilizada;
-    @Size(max = 100)
-    @Column(name = "MON_INFO_DISCO_DISP")
     private String monInfoDiscoDisp;
-    @Size(max = 100)
-    @Column(name = "MON_INFO_DISCO_UTILIZADO")
     private String monInfoDiscoUtilizado;
-    @Size(max = 15)
-    @Column(name = "MON_INFO_TEMPERATURA")
     private String monInfoTemperatura;
-    @Size(max = 15)
-    @Column(name = "MON_INFO_QNTD_PROCESSOS")
     private String monInfoQntdProcessos;
-    @Column(name = "MON_INFO_CON_REDE")
     private Boolean monInfoConRede;
-    @JoinColumn(name = "MON_COD_RASP", referencedColumnName = "EQP_ID")
-    @ManyToOne(optional = false)
-    private RaspEquipamento monCodRasp;
+    private Integer monCodRasp;
 
-    public RaspMonitoramento() {
+    public RaspMonitoramentoAux() {
     }
 
-    public RaspMonitoramento(Integer monId) {
+    public RaspMonitoramentoAux(Integer monId) {
         this.monId = monId;
     }
 
-    public RaspMonitoramento(Integer monId, Date monDataInfo) {
+    public RaspMonitoramentoAux(Integer monId, Date monDataInfo) {
         this.monId = monId;
         this.monDataInfo = monDataInfo;
     }
@@ -170,11 +141,11 @@ public class RaspMonitoramento implements Serializable {
         this.monInfoConRede = monInfoConRede;
     }
 
-    public RaspEquipamento getMonCodRasp() {
+    public Integer getMonCodRasp() {
         return monCodRasp;
     }
 
-    public void setMonCodRasp(RaspEquipamento monCodRasp) {
+    public void setMonCodRasp(Integer monCodRasp) {
         this.monCodRasp = monCodRasp;
     }
 
@@ -188,10 +159,10 @@ public class RaspMonitoramento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RaspMonitoramento)) {
+        if (!(object instanceof RaspMonitoramentoAux)) {
             return false;
         }
-        RaspMonitoramento other = (RaspMonitoramento) object;
+        RaspMonitoramentoAux other = (RaspMonitoramentoAux) object;
         if ((this.monId == null && other.monId != null) || (this.monId != null && !this.monId.equals(other.monId))) {
             return false;
         }

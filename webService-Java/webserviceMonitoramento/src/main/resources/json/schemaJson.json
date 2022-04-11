@@ -1,0 +1,55 @@
+{  
+    "$schema": "https://json-schema.org/draft/2019-09/schema#",  
+    "type": "object",  
+    "required": "monCodRasp",  
+    "properties": {  
+        "monInfoCpuDisp": {  
+            "type": ["string", "null"],
+			"maxLength": 100,			
+            "description": "CPU Disponivel"  
+        },  
+        "monInfoCpuUtilizada": {   
+            "type": ["string", "null"],  
+            "maxLength": 100,  
+            "description": "CPU Utilizada"  
+        },  
+        "monInfoRamDisp": {  
+            "type": ["string", "null"],
+			"maxLength": 100,			
+            "description": "Ram Disponivel"  
+        },  
+		"monInfoRamUtilizada": {  
+            "type": ["string", "null"],
+			"maxLength": 100,			
+            "description": "Ram Utilizada"  
+        },
+		"monInfoDiscoDisp": {  
+            "type": ["string", "null"],
+			"maxLength": 100,			
+            "description": "Disco Disponivel"  
+        },
+		"monInfoDiscoUtilizado": {  
+            "type": ["string", "null"],
+			"maxLength": 100,			
+            "description": "Disco Utilizado"  
+        },
+		"monInfoTemperatura": {  
+            "type": ["string", "null"],
+			"maxLength": 15,			
+            "description": "Temperatura"  
+        },
+		"monInfoQntdProcessos": {  
+            "type": ["string", "null"],
+			"maxLength": 15,			
+            "description": "Quantidade de processos"  
+        },
+		"monInfoConRede": {  
+            "type": ["boolean"],
+            "description": "Conectado a internet?"  
+        },
+		"monCodRasp": {  
+            "type": "integer",
+            "description": "Codigo do Rasp"  
+        } 
+    }
+}  

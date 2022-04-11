@@ -6,9 +6,7 @@
 package br.com.ConexaoBD;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
