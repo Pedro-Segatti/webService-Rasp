@@ -61,14 +61,22 @@ public class RaspMonitoramentoService {
         JsonValue codigoRasp = json.get("monCodRasp");
         
         RaspEquipamento raspberry = crudService.procurar(RaspEquipamento.class, Integer.valueOf(codigoRasp.toString()));
-
+        if(raspberry == null){
+            return "Equipamento não encontrado";
+        }
+        
         RaspMonitoramentoAux infosMonitoramento = gson.fromJson(json.toString(), RaspMonitoramentoAux.class);
         RaspMonitoramento raspMon = convertObject(infosMonitoramento);
         raspMon.setMonCodRasp(raspberry);
-        crudService.salvar(raspMon);
+        raspMon = crudService.salvar(raspMon);
         
-        System.out.println(infosMonitoramento.getMonInfoRamUtilizada());
-        return "ds";
+        deletaRegistrosAntigos();
+        
+        return  "Registro " + raspMon.getMonId() + " criado";
+    }
+    
+    private void deletaRegistrosAntigos(){
+        crudService.deletaRegistrosAntigos();
     }
 
     private String getJsonSchema() {

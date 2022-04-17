@@ -32,6 +32,10 @@ public abstract class ConexaoBd implements Serializable {
         return (T) getEntityManager().find(classe, 1);
     }
 
+    public void deletaRegistrosAntigos() {
+        getEntityManager().createNativeQuery("DELETE FROM RASP_MONITORAMENTO WHERE MON_DATA_INFO <= DATE_SUB(DATE(NOW()), INTERVAL 30 DAY)").executeUpdate();
+    }
+
     public <T> T procurar(Class classe, Object id) {
         return (T) getEntityManager().find(classe, id);
     }
