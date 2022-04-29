@@ -5,6 +5,8 @@
  */
 package br.com.ConexaoBD;
 
+import br.com.mapeamento.RaspEquipamento;
+import br.com.mapeamento.RaspMonitoramento;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -33,7 +35,15 @@ public abstract class ConexaoBd implements Serializable {
     }
 
     public void deletaRegistrosAntigos() {
-        getEntityManager().createNativeQuery("DELETE FROM RASP_MONITORAMENTO WHERE MON_DATA_INFO <= DATE_SUB(DATE(NOW()), INTERVAL 30 DAY)").executeUpdate();
+        getEntityManager().createNativeQuery("DELETE FROM RASP_MONITORAMENTO WHERE MON_DATA_INFO <= DATE_SUB(DATE(NOW()), INTERVAL 10 DAY)").executeUpdate();
+    }
+
+    public RaspMonitoramento getUltimoRegistroMonitoramento(RaspEquipamento equip) {
+        return (RaspMonitoramento) getEntityManager().createNativeQuery("SELECT * FROM RASP_MONITORAMENTO WHERE MON_COD_RASP = " + equip.getEqpId() + " ORDER BY MON_ID DESC limit 1;", RaspMonitoramento.class).getSingleResult();
+    }
+    
+    public List<RaspEquipamento> getEquipmentos() {
+        return getEntityManager().createNativeQuery("SELECT * FROM RASP_EQUIPAMENTO", RaspEquipamento.class).getResultList();
     }
 
     public <T> T procurar(Class classe, Object id) {
