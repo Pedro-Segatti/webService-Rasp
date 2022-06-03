@@ -18,18 +18,6 @@ class MonitoramentoUtil:
         cmdConRede = ['ifconfig']
         codRasp = 1 
 
-#Comandos a serem executados no cmd 
-        #cmdCpuDisp = ['wmic', 'memorychip', 'get', 'speed']
-        #cmdCpuDispUtilizada = ['wmic', 'memorychip', 'get', 'speed']
-        #cmdRamDisp = ['wmic', 'memorychip', 'get', 'speed']
-        #cmdRamUtilizada = ['wmic', 'memorychip', 'get', 'speed']
-        #cmdDiscoDisp =  ['wmic', 'memorychip', 'get', 'speed']
-        #cmdDiscoUtilizado = ['wmic', 'memorychip', 'get', 'speed']
-        #cmdTemperatura =  ['wmic', 'memorychip', 'get', 'speed']
-        #cmdQntdProcessos = ['wmic', 'memorychip', 'get', 'speed']
-        #cmdConRede = ['wmic', 'memorychip', 'get', 'speed']
-        #codRasp = 1 
-
         #Informações recuperadas do cmd após execução dos comandos
         monInfoCpuDisp = subprocess.check_output(cmdCpuDisp).decode(sys.stdout.encoding)
         monInfoCpuUtilizada = subprocess.check_output(cmdCpuDispUtilizada).decode(sys.stdout.encoding)
@@ -46,9 +34,9 @@ class MonitoramentoUtil:
         raspMon = RaspMonitoramento(monInfoCpuDisp, monInfoCpuUtilizada, monInfoRamDisp, monInfoRamUtilizada, monInfoDiscoDisp, monInfoDiscoUtilizado, monInfoTemperatura, monInfoQntdProcessos, monInfoConRede, monCodRasp)
 
         #Recuperamos apenas o primeiro número recuperado do cmd, que diz respeito a informação solicitada
-        raspMon.monInfoCpuDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuDisp)[0]
-        raspMon.monInfoCpuUtilizada = raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuUtilizada)[0]
-        raspMon.monInfoRamDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoRamDisp)[0]
+        raspMon.monInfoCpuDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuDisp)[2]
+        raspMon.monInfoCpuUtilizada = raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuUtilizada)[1]
+        raspMon.monInfoRamDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoRamDisp)[1]
         raspMon.monInfoRamUtilizada = raspMon.removerCaracteresEspeciais(raspMon.monInfoRamUtilizada)[0]
         raspMon.monInfoDiscoDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoDiscoDisp)[0]
         raspMon.monInfoDiscoUtilizado = raspMon.removerCaracteresEspeciais(raspMon.monInfoDiscoUtilizado)[0]
