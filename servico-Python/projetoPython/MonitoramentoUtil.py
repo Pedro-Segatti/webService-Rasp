@@ -18,6 +18,18 @@ class MonitoramentoUtil:
         cmdConRede = ['ifconfig']
         codRasp = 1 
 
+#Comandos a serem executados no cmd 
+        #cmdCpuDisp = ['wmic', 'memorychip', 'get', 'speed']
+        #cmdCpuDispUtilizada = ['wmic', 'memorychip', 'get', 'speed']
+        #cmdRamDisp = ['wmic', 'memorychip', 'get', 'speed']
+        #cmdRamUtilizada = ['wmic', 'memorychip', 'get', 'speed']
+        #cmdDiscoDisp =  ['wmic', 'memorychip', 'get', 'speed']
+        #cmdDiscoUtilizado = ['wmic', 'memorychip', 'get', 'speed']
+        #cmdTemperatura =  ['wmic', 'memorychip', 'get', 'speed']
+        #cmdQntdProcessos = ['wmic', 'memorychip', 'get', 'speed']
+        #cmdConRede = ['wmic', 'memorychip', 'get', 'speed']
+        #codRasp = 1 
+
         #Informações recuperadas do cmd após execução dos comandos
         monInfoCpuDisp = subprocess.check_output(cmdCpuDisp).decode(sys.stdout.encoding)
         monInfoCpuUtilizada = subprocess.check_output(cmdCpuDispUtilizada).decode(sys.stdout.encoding)

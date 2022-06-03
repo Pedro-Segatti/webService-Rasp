@@ -7,20 +7,13 @@ from MonitoramentoUtil import MonitoramentoUtil
 import schedule
 import time
 
-def req():
-#Montamos a requisição para enviarmos o put para o webservice
-    URL = "http://localhost:8080/webserviceMonitoramento/service/ws/info/post"
-    headers={'Content-type':'application/json'}
-    cont = 0
-    while cont < 10:
-        raspMon = MonitoramentoUtil.executeCommandPreencheObject()
-        jsonRequest = raspMon.toJSON()
-        cont = cont + 1
-        request = requests.put(URL, json=jsonRequest, headers=headers)
-        print(request.content)
-    
-    schedule.every(1).minutes.do(req)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+URL = "http://192.168.1.111:8080/webserviceMonitoramento/service/ws/info/post"
+headers={'Content-type':'application/json'}
+
+#Montamos a requisição para enviarmos o put para o webservice
+raspMon = MonitoramentoUtil.executeCommandPreencheObject()
+jsonRequest = raspMon.toJSON()
+request = requests.put(URL, json=jsonRequest, headers=headers, timeout=10)
+print(request.content)
+   
