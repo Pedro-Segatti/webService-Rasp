@@ -22,7 +22,7 @@ def req():
     except requests.exceptions.Timeout as e:
         print('Servidor fora do ar ' + e)
 
-schedule.every(30).seconds.do(req)
+schedule.every(15).seconds.do(req)
 
 while True:
     schedule.run_pending()
