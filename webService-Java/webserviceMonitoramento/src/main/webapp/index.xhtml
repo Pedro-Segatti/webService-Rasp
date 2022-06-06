@@ -34,44 +34,25 @@
         <h:form id="form1">
             <p:poll interval="3" listener="#{monitoramentoBean.attInfosRasp()}" update="dash"/>
 
-            <p:dashboard id="dash" model="#{monitoramentoBean.dashModel}" reordering="false">
-
-                <p:panel id="ramDisp" header="Memória Ram Disponível">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoRamDisp}"/>
-                </p:panel>
-
-                <p:panel id="ramUtil" header="Memória Ram Utilizada">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoRamUtilizada}"/>
-                </p:panel>
-
-                <p:panel id="cpuDisp" header="CPU Disponível">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoCpuDisp}"/>
-                </p:panel>
-
-                <p:panel id="cpuUtil" header="CPU Utilizado">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoCpuUtilizada}"/>
-                </p:panel>
-
-                <p:panel id="discoDisp" header="Disco Disponível">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoDiscoDisp}"/>
-                </p:panel>
-
-                <p:panel id="discoUtil" header="Disco Utilizado">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoDiscoUtilizado}"/>
-                </p:panel>
-
-                <p:panel id="qntdProcess" header="Processos">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoQntdProcessos}"/>
-                </p:panel>
-
-                <p:panel id="conectadoRede" header="Rede">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoConRede}"/>
-                </p:panel>
-
-                <p:panel id="temperatura" header="Temperatura">
-                    <h:outputText value="#{monitoramentoBean.raspMon.monInfoTemperatura}"/>
-                </p:panel>
-            </p:dashboard>
+            <p:outputPanel id="dash">
+                #{monitoramentoBean.raspMon.monInfoRamDisp}
+                
+                #{monitoramentoBean.raspMon.monInfoRamUtilizada}
+                
+                #{monitoramentoBean.raspMon.monInfoCpuDisp}
+                
+                #{monitoramentoBean.raspMon.monInfoCpuUtilizada}
+                
+                #{monitoramentoBean.raspMon.monInfoDiscoDisp}
+                
+                #{monitoramentoBean.raspMon.monInfoDiscoUtilizado}
+                
+                #{monitoramentoBean.raspMon.monInfoQntdProcessos}
+                
+                #{monitoramentoBean.raspMon.monInfoConRede}
+                
+                #{monitoramentoBean.raspMon.monInfoTemperatura}
+            </p:outputPanel>
         </h:form>
     </h:body>
 </html>
