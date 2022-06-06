@@ -40,7 +40,7 @@ class MonitoramentoUtil:
         raspMon.monInfoRamUtilizada = raspMon.removerCaracteresEspeciais(raspMon.monInfoRamUtilizada)[0] 
         raspMon.monInfoDiscoDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoDiscoDisp)[0] #OLHAR CMD
         raspMon.monInfoDiscoUtilizado = raspMon.removerCaracteresEspeciais(raspMon.monInfoDiscoUtilizado)[0] #OLHAR CMD
-        raspMon.monInfoTemperatura = raspMon.removerCaracteresEspeciais(raspMon.monInfoTemperatura)[2] + ". " + raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuUtilizada)[3]
+        raspMon.monInfoTemperatura = raspMon.removerCaracteresEspeciais(raspMon.monInfoTemperatura)[1] + ". " + raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuUtilizada)[2]
         raspMon.monInfoQntdProcessos = raspMon.removerCaracteresEspeciais(raspMon.monInfoQntdProcessos)[0]
 
         return raspMon
