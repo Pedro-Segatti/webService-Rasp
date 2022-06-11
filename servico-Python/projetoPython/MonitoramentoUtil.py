@@ -13,8 +13,8 @@ class MonitoramentoUtil:
         cmdRamUtilizada = ['dstat', '-m', '1', '1']
         cmdDiscoDisp =  ['df', '-h']
         cmdDiscoUtilizado = ['df', '-h']
-        cmdTemperatura =  ['dstat', '-c', '1', '1']
-        cmdQntdProcessos = ['ps', '-e', '|', 'wc', '-l']
+        cmdTemperatura =  ['sensors']
+        cmdQntdProcessos = ['bash', '/contaProcessos']
         codRasp = 1 
 
         try:
@@ -43,7 +43,7 @@ class MonitoramentoUtil:
             raspMon.monInfoRamUtilizada = raspMon.removerCaracteresEspeciais(raspMon.monInfoRamUtilizada)[0] 
             raspMon.monInfoDiscoDisp = raspMon.removerCaracteresEspeciais(raspMon.monInfoDiscoDisp)[2]
             raspMon.monInfoDiscoUtilizado = raspMon.removerCaracteresEspeciais(raspMon.monInfoDiscoUtilizado)[1]
-            raspMon.monInfoTemperatura = raspMon.removerCaracteresEspeciais(raspMon.monInfoTemperatura)[1] + ". " + raspMon.removerCaracteresEspeciais(raspMon.monInfoCpuUtilizada)[2]
+            raspMon.monInfoTemperatura = raspMon.removerCaracteresEspeciais(raspMon.monInfoTemperatura)[2] + ". " + raspMon.removerCaracteresEspeciais(raspMon.monInfoTemperatura)[3]
             raspMon.monInfoQntdProcessos = raspMon.removerCaracteresEspeciais(raspMon.monInfoQntdProcessos)[0]
         except Exception as e:
             print('A leituta dos comandos e extração das informações pertinentes geraram uma exceção: ' + e)

@@ -12,10 +12,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import org.primefaces.model.DashboardColumn;
-import org.primefaces.model.DashboardModel;
-import org.primefaces.model.DefaultDashboardColumn;
-import org.primefaces.model.DefaultDashboardModel;
 
 /**
  *
@@ -28,8 +24,6 @@ public class MonitoramentoBean implements Serializable {
     @EJB
     private CrudService crudService;
 
-    private DashboardModel dashModel;
-
     private List<RaspEquipamento> raspEquip = new ArrayList<>();
     private RaspEquipamento raspEquipSelecionado;
     private RaspMonitoramento raspMon = new RaspMonitoramento();
@@ -40,40 +34,15 @@ public class MonitoramentoBean implements Serializable {
         if (raspEquip != null && !raspEquip.isEmpty()) {
             raspEquipSelecionado = raspEquip.get(0);
         }
-        criaModel();
     }
 
     public void attInfosRasp() {
         if (this.raspEquipSelecionado != null) {
             this.raspMon = crudService.getUltimoRegistroMonitoramento(this.raspEquipSelecionado);
+            crudService.deletaRegistrosAntigos();
         }
     }
 
-    private void criaModel() {
-        dashModel = new DefaultDashboardModel();
-        DashboardColumn column1 = new DefaultDashboardColumn();
-        DashboardColumn column2 = new DefaultDashboardColumn();
-        DashboardColumn column3 = new DefaultDashboardColumn();
-
-        System.out.println(column3.getStyle());
-        
-        column1.addWidget("ramDisp");
-        column1.addWidget("cpuDisp");
-        column1.addWidget("discoDisp");
-
-        column2.addWidget("ramUtil");
-        column2.addWidget("cpuUtil");
-        column2.addWidget("discoUtil");
-
-        column3.addWidget("qntdProcess");
-        column3.addWidget("conectadoRede");
-        column3.addWidget("temperatura");
-
-        dashModel.addColumn(column1);
-        dashModel.addColumn(column2);
-        dashModel.addColumn(column3);
-    }
-    
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -86,11 +55,41 @@ public class MonitoramentoBean implements Serializable {
         return raspMon;
     }
 
-    public DashboardModel getDashModel() {
-        return dashModel;
+    public Integer getPorcentagemUtilizacaoRam() {
+        if (raspMon.getMonInfoRamDisp() == null || raspMon.getMonInfoRamUtilizada() == null) {
+            return 0;
+        }
+
+        Double memoriaTotal = Double.parseDouble(raspMon.getMonInfoRamDisp()) + Double.parseDouble(raspMon.getMonInfoRamUtilizada());
+
+        return (int) (100 * Double.parseDouble(raspMon.getMonInfoRamUtilizada()) / memoriaTotal);
     }
 
-    public void setDashModel(DashboardModel dashModel) {
-        this.dashModel = dashModel;
+    public Integer getPorcentagemRamDisponivel() {
+        if (raspMon.getMonInfoRamDisp() == null || raspMon.getMonInfoRamUtilizada() == null) {
+            return 0;
+        }
+
+        Double memoriaTotal = Double.parseDouble(raspMon.getMonInfoRamDisp()) + Double.parseDouble(raspMon.getMonInfoRamUtilizada());
+
+        return (int) (100 * Double.parseDouble(raspMon.getMonInfoRamDisp()) / memoriaTotal);
+    }
+
+    public Integer getPorcentagemUtilizacaoDisco() {
+        if (raspMon.getMonInfoDiscoDisp() == null || raspMon.getMonInfoDiscoUtilizado() == null) {
+            return 0;
+        }
+
+        Double discoTotal = Double.parseDouble(raspMon.getMonInfoDiscoDisp()) + Double.parseDouble(raspMon.getMonInfoDiscoUtilizado());
+        return (int) (100 * Double.parseDouble(raspMon.getMonInfoDiscoUtilizado()) / discoTotal);
+    }
+
+    public Integer getPorcentagemDiscoDisponivel() {
+        if (raspMon.getMonInfoDiscoDisp() == null || raspMon.getMonInfoDiscoUtilizado() == null) {
+            return 0;
+        }
+
+        Double discoTotal = Double.parseDouble(raspMon.getMonInfoDiscoDisp()) + Double.parseDouble(raspMon.getMonInfoDiscoUtilizado());
+        return (int) (100 * Double.parseDouble(raspMon.getMonInfoDiscoDisp()) / discoTotal);
     }
 }

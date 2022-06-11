@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html  xmlns="http://www.w3.org/1999/xhtml" 
-       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
-       xmlns:p="http://primefaces.org/ui" 
-       xmlns:h="http://xmlns.jcp.org/jsf/html" 
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
        xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>
@@ -18,166 +18,174 @@
         </f:facet>
 
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
     </h:head>
 
     <h:body>
-        <style type="text/css">
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #fff;
-            }
-
+        <style>
             .tituloCont {
                 display: flex;
-                margin: 90px 30px 0px 30px;
+                margin-top: 2%;
                 justify-content: center;
                 align-items: center;
-                font-size: 18px;
+                font-size: 32px;
             }
 
-            .container {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                margin: 10px 30px;
-                justify-content: space-around;
-                align-items: center;
+            .content{
+                margin-left: 5%;
+                margin-right: 5%;
             }
 
-            .conteudo {
-                display: flex;
-                justify-content: center;
-                margin: 5px;
-                padding: 5px;
-                text-align: justify;
-                width: 310px;
-                font-size: 18px;
-            }
-
-            .tabela {
-                max-width: 300px;
-                min-width: 300px;
-                border-collapse: separate;
-                text-align: left;
-                border: 1px solid #f2f1ef;
-                font-size: 16px;
-            }
-
-            .tabela thead {
-                color: #000;
+            .center{
                 text-align: center;
-                justify-content: center;
-                align-items: center;
             }
 
-            .tabela tbody tr {
-                height: 25px;
+            .ui-panelgrid .ui-panelgrid-cell{
+                padding: 0.3rem !important;
             }
 
-            .tabela tbody td {
+            .ui-card{
+                height: 350px;
+            }
+
+            .ui-card .ui-card-title{
                 text-align: center;
-                vertical-align: middle;
             }
 
-            .tabela .dado {
-                width: 150px;
-                font-weight: bold;
+            .ui-card .ui-card-subtitle{
+                text-align: center;
+                font-size: 22px;
             }
-
-            .tabela tbody tr:nth-child(2n) {
-                background:rgba(242, 241, 239, 0.5);
-            }
-
-            .pie {
-                --w:150px;
-                width: var(--w);
-                aspect-ratio: 1;
-                position: relative;
-                display: inline-grid;
-                place-content: center;
-                margin: 5px;
-                font-size: 25px;
-                font-weight: bold;
-                font-family: sans-serif;
-            }
-            .pie:before {
-                content: "";
-                position: absolute;
-                border-radius: 50%;
-                inset: 0;
-                background: conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
-                -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-                mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-            }
-
         </style>
+
         <h:form id="form1">
-            <p:poll interval="3" listener="#{monitoramentoBean.attInfosRasp()}" update="dash"/>
+            <p:poll interval="3" listener="#{monitoramentoBean.attInfosRasp()}" update="dash" />
 
             <p:outputPanel id="dash">
-                <h1 class="tituloCont">Monitoramento de Raspberries</h1>
+                <div class="content">
+                    <h1 class="tituloCont">Monitoramento de Raspberries</h1>
+                    <p:panelGrid columns="2" layout="grid">
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    Memória Ram Utilizada
+                                </f:facet>
 
-                <div class="container">
-                    <div class="conteudo">
-                        <table class="tabela">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Raspberry 1</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="dado">RAM Utilizada</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoRamUtilizada}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">RAM Disponível</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoRamDisp}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">CPU Utilizado</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoCpuUtilizada}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">CPU Disponível</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoCpuDisp}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">Disco Utilizado</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoDiscoUtilizado}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">Disco Disponível</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoDiscoDisp}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">Processos</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoQntdProcessos}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">Conexão de Rede</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoConRede}</td>
-                                </tr>
-                                <tr>
-                                    <td class="dado">Temperatura</td>
-                                    <td>#{monitoramentoBean.raspMon.monInfoTemperatura}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class = "conteudo"> 
-                        <table class="tabela">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Temperatura</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td><div class="pie" style="--p:#{monitoramentoBean.raspMon.monInfoTemperatura};--b:10px;--c:grey;">#{monitoramentoBean.raspMon.monInfoTemperatura}</div></td>
-                            </tbody>
-                        </table>
-                    </div>
+                                <f:facet name="subtitle">
+                                    #{monitoramentoBean.raspMon.monInfoRamUtilizada}M
+                                </f:facet>
+
+                                <div class="center">
+                                    <p:knob labelTemplate="{value}%" colorTheme="hot-sneaks" value="#{monitoramentoBean.porcentagemUtilizacaoRam}" disabled="true"/>
+                                </div>
+
+                            </p:card>
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    Memória Ram Disponível
+                                </f:facet>
+
+                                <f:facet name="subtitle">
+                                    #{monitoramentoBean.raspMon.monInfoRamDisp}M
+                                </f:facet>
+
+                                <div class="center">
+                                    <p:knob labelTemplate="{value}%" foregroundColor="#2196F3" backgroundColor="#495057" value="#{monitoramentoBean.porcentagemRamDisponivel}" disabled="true"/>
+                                </div>
+                            </p:card>
+                        </p:panelGrid>
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" layout="grid">
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    Disco Utilizado
+                                </f:facet>
+
+                                <f:facet name="subtitle">
+                                    #{monitoramentoBean.raspMon.monInfoDiscoUtilizado}G
+                                </f:facet>
+
+                                <div class="center">
+                                    <p:knob labelTemplate="{value}%" colorTheme="hot-sneaks" value="#{monitoramentoBean.porcentagemUtilizacaoDisco}" disabled="true"/>
+                                </div>
+
+                            </p:card>
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    Disco Disponível
+                                </f:facet>
+
+                                <f:facet name="subtitle">
+                                    #{monitoramentoBean.raspMon.monInfoDiscoDisp}G
+                                </f:facet>
+
+                                <div class="center">
+                                    <p:knob labelTemplate="{value}%" foregroundColor="#2196F3" backgroundColor="#495057" value="#{monitoramentoBean.porcentagemDiscoDisponivel}" disabled="true"/>
+                                </div>
+                            </p:card>
+                        </p:panelGrid>
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" layout="grid">
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    CPU Utilizado
+                                </f:facet>
+
+                                <div class="center">
+                                    <p:knob labelTemplate="{value}%" colorTheme="hot-sneaks" value="#{monitoramentoBean.raspMon.monInfoCpuUtilizada}" disabled="true"/>
+                                </div>
+
+                            </p:card>
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    CPU Disponível
+                                </f:facet>
+
+                                <div class="center">
+                                    <p:knob labelTemplate="{value}%" colorTheme="hot-sneaks" value="#{monitoramentoBean.raspMon.monInfoCpuDisp}" disabled="true"/>
+                                </div>
+                            </p:card>
+                        </p:panelGrid>
+                    </p:panelGrid>
+
+                    <p:panelGrid columns="2" layout="grid">
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    Temperatura
+                                </f:facet>
+
+                                <f:facet name="subtitle">
+                                    <p:knob labelTemplate="{value}°C" colorTheme="hot-sneaks" value="#{monitoramentoBean.raspMon.monInfoTemperatura}" disabled="true"/>
+                                </f:facet>
+                            </p:card>
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:card>
+                                <f:facet name="title">
+                                    Processos em Execução
+                                </f:facet>
+
+                                <f:facet name="subtitle">
+                                    #{monitoramentoBean.raspMon.monInfoQntdProcessos}
+                                </f:facet>
+                            </p:card>
+                        </p:panelGrid>
+                    </p:panelGrid>
                 </div>
             </p:outputPanel>
         </h:form>
